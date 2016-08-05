@@ -55,13 +55,14 @@
         item.setStyle(mediumWhite);
     }
     function clickReady(item){
-        game.state.start('play');
+        game.state.start('play'); //CHANGE ME BACK!!!
+    }
+    function toMenu(item){
+        game.state.start('menu');
     }
     function calculateScores(){
         controlTimes.avg=parseFloat(controlTimes.reduce(function(sum, a) { return sum + a },0)/(controlTimes.length||1)/1000).toFixed(2);
         subjectTimes.avg=parseFloat(subjectTimes.reduce(function(sum, a) { return sum + a },0)/(subjectTimes.length||1)/1000).toFixed(2);
-        //"subj is 50 % slower than contol" (speedSubj - speedControl)/speedSubj = 50%
-        //"Subj is 100 % faster than Ctrl" (speedCtrl - speedSubj)/speedSubj = 100%
         if(controlTimes.avg>subjectTimes.avg){
             var percentFaster=parseFloat((controlTimes.avg-subjectTimes.avg)/subjectTimes.avg).toFixed(1);
             return ({percent: percentFaster, result:'faster'})
@@ -92,10 +93,11 @@
     var subjectTimes=[];
 
     //styling variables
-    var mediumWhite={ font: 'bold 20pt Arial ', fill: 'white'};
+    //TODO: Update names to generic!!
+    var mediumWhite={ font: 'bold 20pt Arial', fill: 'black'};
     var mediumGray={ font: 'bold 20pt Arial', fill: 'gray'};
     var largeGray={ font: 'bold 30pt Arial', fill: 'gray'};
-    var largeWhite={ font: 'bold 30pt Arial', fill: 'white'};
-    var largeDarkGray={ font: 'bold 30pt Arial', fill: '#333333'};
+    var largeWhite={ font: 'bold 30pt Arial', fill: 'black'};
+    var largeDarkGray={ font: 'bold 30pt Arial', fill: 'white'};
     var mediumRed= { font: 'bold 20pt Arial', fill: 'red'};
     var mediumGreen= { font: 'bold 20pt Arial', fill: 'green'};

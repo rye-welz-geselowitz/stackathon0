@@ -1,4 +1,4 @@
-    //RECEIVING DATA
+    //ROUND ONE
     var subjectName='Jamie';
     var subjectPGP='she/her'
     var controlName='Bill';
@@ -40,3 +40,9 @@
     ]
     var gameInput=[];
     fillGameInput();
+
+    //ROUND TWO
+    var wordDropData={
+        me: ['ponies','she','her','puppies','coding','hiking','movies','Jamie','American','student','New Yorker','girl','woman'],
+        notMe: ['he','him','exercise','swimming','meat','homework','spinach']
+    }

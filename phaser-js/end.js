@@ -1,5 +1,7 @@
     var endState={
         create: function(){
+            game.add.sprite(0,0,'mountains');
+
             //Report scores
             var scoreReport=calculateScores();
             if(scoreReport.result==='faster'){
@@ -11,34 +13,17 @@
             else{
                 scoreReportText('Congratulations! Your response time for',subjectName,'was just as fast as for',controlName,mediumGreen);
             }
-
-            // var scoreReportSubject='Average time for '+subjectName+': '+subjectTimes.avg.toString()+ ' s';
-            // var scoreReportControl='Average time for '+controlName+': '+controlTimes.avg.toString()+' s';
-
-            // var subjectScore=game.add.text(game.world.centerX,game.world.centerY+40,scoreReportSubject,mediumWhite); 
-            // var controlScore=game.add.text(game.world.centerX,game.world.centerY+80,scoreReportControl,mediumWhite); 
-            // subjectScore.anchor.set(.5);
-            // controlScore.anchor.set(.5);
-            // if(subjectTimes.avg<controlTimes.avg){
-            //     subjectScore.setStyle(mediumGreen)
-            //     controlScore.setStyle(mediumRed)
-            // }
-            // if(subjectTimes.avg>controlTimes.avg){
-            //     subjectScore.setStyle(mediumRed)
-            //     controlScore.setStyle(mediumGreen)
-            // }
-
             //Reset Scores
             controlTimes=[];
             subjectTimes=[];
             fillGameInput();
             //Replay button
-            var readyButton=game.add.text(game.world.centerX,game.world.centerY+120,'Replay',mediumWhite); 
+            var readyButton=game.add.text(game.world.centerX,game.world.centerY+120,'Menu',mediumWhite); 
             readyButton.anchor.set(.5);
             readyButton.inputEnabled=true;
             readyButton.events.onInputOver.add(overReady,this);
             readyButton.events.onInputOut.add(overReadyLeave,this);
-            readyButton.events.onInputDown.add(clickReady,this);
+            readyButton.events.onInputDown.add(toMenu,this);
 
         }
     }

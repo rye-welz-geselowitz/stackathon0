@@ -1,8 +1,9 @@
     var instructionsState={
          create: function(){
+            game.add.sprite(0,0,'mountains');
             var challengeString1=subjectName+' uses '+subjectPGP+' pronouns.'
             var challengeString2=controlName+' uses '+controlPGP+' pronouns.'
-            var instructions=game.add.text(game.world.centerX,game.world.centerY,'Fill in the blanks with the correct pronouns.',mediumGray); 
+            var instructions=game.add.text(game.world.centerX,game.world.centerY,'Fill in the sentences with the correct pronouns.',mediumGray); 
             var readyButton=game.add.text(game.world.centerX,game.world.centerY+instructions.height*1.5,'Play',mediumWhite); 
             var challenge=game.add.text(game.world.centerX,game.world.centerY-instructions.height*3,challengeString1,mediumGray); 
             var challenge2=game.add.text(game.world.centerX,game.world.centerY-instructions.height*1.5,challengeString2,mediumGray); 

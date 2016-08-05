@@ -1,5 +1,6 @@
     var playState={
         create: function(){
+            game.add.sprite(0,0,'mountains');
             playStart=game.time.now;
             sentence=textWithBody(gameInput[0].sentencePre,0,0,game.world.centerX,game.world.centerY,mediumWhite,true);
             //create words group
