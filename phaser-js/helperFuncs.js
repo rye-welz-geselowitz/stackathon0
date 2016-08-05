@@ -19,35 +19,12 @@
         }
         return textSprite;    
     }
-    function onDown(sprite, pointer) {
-        var roundTime=game.time.elapsedSince(playStart);
-        var clickedText=sprite.children[0];
-        var clickedString=clickedText.text;
-        clickedText.setStyle(largeDarkGray);
-        if(clickedString===gameInput[0].correctAnswer){
-            clickedText.setStyle(largeWhite);
-            words.forEach(function(word){word.body.velocity=0})
-            sentence.children[0].text=gameInput[0].sentencePost;
-            if(gameInput[0].isSubject){
-                subjectTimes.push(roundTime);
-            }
-            else{
-                controlTimes.push(roundTime);
-            }
-            gameInput.shift();
-            if(gameInput.length){
-                setTimeout(function(){
-                    game.state.start('play');
-                 }, 1500);
-                
-            }
-            else{
-                setTimeout(function(){
-                    game.state.start('end');
-                 }, 1500);
-            }
-        }
+
+    function getPronounString(PGP){
+        var spDict=gameData.pronouns[PGP];
+        return spDict['S']+'/'+spDict['O'];
     }
+
     function overReady(item) {
         item.setStyle(mediumGray);
     }
@@ -60,32 +37,38 @@
     function toMenu(item){
         game.state.start('menu');
     }
-    function calculateScores(){
-        controlTimes.avg=parseFloat(controlTimes.reduce(function(sum, a) { return sum + a },0)/(controlTimes.length||1)/1000).toFixed(2);
-        subjectTimes.avg=parseFloat(subjectTimes.reduce(function(sum, a) { return sum + a },0)/(subjectTimes.length||1)/1000).toFixed(2);
-        if(controlTimes.avg>subjectTimes.avg){
-            var percentFaster=parseFloat((controlTimes.avg-subjectTimes.avg)/subjectTimes.avg).toFixed(1);
-            return ({percent: percentFaster, result:'faster'})
-        }
-        if(controlTimes.avg<subjectTimes.avg){
-            var percentSlower=parseFloat((subjectTimes.avg-controlTimes.avg)/subjectTimes.avg).toFixed(1);
-            return ({percent: percentSlower, result: 'slower'})
-        }
-        else{
-            return ({result: 'equal'})
-        }
+
+    initiateRoundClicker=function(){
+        gameData.currentGame={};
+        gameData.currentGame.control=gameData.controls[Math.floor(Math.random()*gameData.controls.length)];
+        gameData.currentGame.gameInput=createGameInput();
+        gameData.currentGame.controlTimes=[];
+        gameData.currentGame.subjectTimes=[];
     }
-    function fillGameInput(){
-        gameInput=[];
-        for(var i=0;i<immutableInput.length;i++){
-            if(Math.random()<.5){
-                gameInput.push(immutableInput[i]);
+    initiateRoundWordRain=function(){
+        gameData.currentGame={};
+        gameData.currentGame.meWords=gameData.subject.associatedWords;
+        gameData.currentGame.notMeWords=gameData.subject.unAssociatedWords;
+        var pronounKeys=Object.keys(gameData.pronouns);
+        for(var i=0; i<pronounKeys.length; i++){
+            if(pronounKeys[i]===gameData.subject.PGP){
+                var toAdd=gameData.pronouns[pronounKeys[i]]['S'];
+                Math.random()>.5? gameData.currentGame.meWords.push(toAdd) : gameData.currentGame.meWords.unshift(toAdd);
+                toAdd=gameData.pronouns[pronounKeys[i]]['O'];
+                Math.random()>.5? gameData.currentGame.meWords.push(toAdd) : gameData.currentGame.meWords.unshift(toAdd);
+
             }
             else{
-                gameInput.unshift(immutableInput[i]);
+                var toAdd=gameData.pronouns[pronounKeys[i]]['S'];
+                Math.random()>.5? gameData.currentGame.notMeWords.push(toAdd) : gameData.currentGame.notMeWords.unshift(toAdd);
+                toAdd=gameData.pronouns[pronounKeys[i]]['O'];
+                Math.random()>.5? gameData.currentGame.notMeWords.push(toAdd) : gameData.currentGame.notMeWords.unshift(toAdd);          
             }
         }
+        gameData.currentGame.score=0; 
     }
+
+
 
     //GAME VARIABLES
     var playStart;

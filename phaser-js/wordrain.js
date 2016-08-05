@@ -7,7 +7,8 @@ var scoreText;
 
 var wordrainState={
     create: function(){
-        wrScore=0;
+        initiateRoundWordRain();
+
         //background
         game.add.sprite(0,0,'water_mountains');
         //score
@@ -17,11 +18,11 @@ var wordrainState={
         meWords=game.add.group();
         meWords.enableBody=true;
         var word;
-        for(var i=0;i<wordDropData.me.length;i++){
+        for(var i=0;i<gameData.currentGame.meWords.length;i++){
             var yCoord=0-(Math.random()*game.world.height);
             var velocityX=100*Math.random();
-            word=textWithBody(wordDropData.me[i],0,velocityX,Math.random()*game.world.width,yCoord,mediumGreen,false)
-            if(['she','her','him','he','they','them'].indexOf(wordDropData.me[i])!==-1){
+            word=textWithBody(gameData.currentGame.meWords[i],0,velocityX,Math.random()*game.world.width,yCoord,mediumGreen,false)
+            if(['she','her','him','he','they','them'].indexOf(gameData.currentGame.meWords[i])!==-1){
                 word.children[0].setStyle(largeGreen);
             }
             
@@ -31,11 +32,11 @@ var wordrainState={
             meWords.add(word);
         }
         notMeWords=game.add.group();
-        for(var i=0;i<wordDropData.notMe.length;i++){
+        for(var i=0;i<gameData.currentGame.notMeWords.length;i++){
             var yCoord=0-(Math.random()*game.world.height);
             var velocityX=100*Math.random();
-            word=textWithBody(wordDropData.notMe[i],0,velocityX,Math.random()*game.world.width,yCoord,mediumRed,false)
-            if(['she','her','him','he','they','them'].indexOf(wordDropData.notMe[i])!==-1){
+            word=textWithBody(gameData.currentGame.notMeWords[i],0,velocityX,Math.random()*game.world.width,yCoord,mediumRed,false)
+            if(['she','her','him','he','they','them'].indexOf(gameData.currentGame.notMeWords[i])!==-1){
                 word.children[0].setStyle(largeRed);
             }
             word.body.collideWorldBounds = false;
@@ -87,11 +88,11 @@ var wordrainState={
 
 function reward(crate,word){
     word.kill();
-    wrScore++;
-    scoreText.text = 'Score: ' + wrScore;
+    gameData.currentGame.score++;
+    scoreText.text = 'Score: ' + gameData.currentGame.score;
 }
-function punish(crate,word){
+function punish(crate,word){ 
     word.kill();
-    wrScore--;
-    scoreText.text = 'Score: ' + wrScore;
+    gameData.currentGame.score--;
+    scoreText.text = 'Score: ' + gameData.currentGame.score;
 }
