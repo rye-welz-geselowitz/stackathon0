@@ -1,6 +1,8 @@
     //RECEIVING DATA
     var subjectName='Jamie';
+    var subjectPGP='she/her'
     var controlName='Bill';
+    var controlPGP='he/him';
     var immutableInput=[{
         subjectPronouns:['She','He','They'],
         correctAnswer: 'She',
@@ -22,7 +24,7 @@
         isSubject: false         
     },
     {
-        subjectPronouns:['her','him','them'],
+        subjectPronouns:['her','his','their'],
         correctAnswer: 'her',
         sentencePre: "Where is JAMIE'S house?",
         sentencePost: 'Where is her house?',

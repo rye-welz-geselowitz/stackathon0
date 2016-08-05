@@ -60,6 +60,19 @@
     function calculateScores(){
         controlTimes.avg=parseFloat(controlTimes.reduce(function(sum, a) { return sum + a },0)/(controlTimes.length||1)/1000).toFixed(2);
         subjectTimes.avg=parseFloat(subjectTimes.reduce(function(sum, a) { return sum + a },0)/(subjectTimes.length||1)/1000).toFixed(2);
+        //"subj is 50 % slower than contol" (speedSubj - speedControl)/speedSubj = 50%
+        //"Subj is 100 % faster than Ctrl" (speedCtrl - speedSubj)/speedSubj = 100%
+        if(controlTimes.avg>subjectTimes.avg){
+            var percentFaster=parseFloat((controlTimes.avg-subjectTimes.avg)/subjectTimes.avg).toFixed(1);
+            return ({percent: percentFaster, result:'faster'})
+        }
+        if(controlTimes.avg<subjectTimes.avg){
+            var percentSlower=parseFloat((subjectTimes.avg-controlTimes.avg)/subjectTimes.avg).toFixed(1);
+            return ({percent: percentSlower, result: 'slower'})
+        }
+        else{
+            return ({result: 'equal'})
+        }
     }
     function fillGameInput(){
         gameInput=[];
