@@ -100,4 +100,6 @@
     var largeWhite={ font: 'bold 30pt Arial', fill: 'black'};
     var largeDarkGray={ font: 'bold 30pt Arial', fill: 'white'};
     var mediumRed= { font: 'bold 20pt Arial', fill: 'red'};
+    var largeRed= { font: 'bold 30pt Arial', fill: 'red'};
+    var largeGreen={ font: 'bold 30pt Arial', fill: 'green'};
     var mediumGreen= { font: 'bold 20pt Arial', fill: 'green'};

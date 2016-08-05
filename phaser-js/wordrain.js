@@ -21,6 +21,11 @@ var wordrainState={
             var yCoord=0-(Math.random()*game.world.height);
             var velocityX=100*Math.random();
             word=textWithBody(wordDropData.me[i],0,velocityX,Math.random()*game.world.width,yCoord,mediumGreen,false)
+            console.log(word.children[0].text);
+            if(['she','her','him','he','they','them'].indexOf(wordDropData.me[i])!==-1){
+                word.children[0].setStyle(largeGreen);
+            }
+            
             word.body.collideWorldBounds = false;
             word.body.gravity.y=6;
             word.body.bounce.y=0.7 + Math.random() * 0.2;
@@ -31,6 +36,10 @@ var wordrainState={
             var yCoord=0-(Math.random()*game.world.height);
             var velocityX=100*Math.random();
             word=textWithBody(wordDropData.notMe[i],0,velocityX,Math.random()*game.world.width,yCoord,mediumRed,false)
+            if(['she','her','him','he','they','them'].indexOf(wordDropData.notMe[i])!==-1){
+                console.log(word);
+                word.children[0].setStyle(largeRed);
+            }
             word.body.collideWorldBounds = false;
             word.body.gravity.y=6;
             word.body.bounce.y=0.7 + Math.random() * 0.2;
@@ -42,7 +51,6 @@ var wordrainState={
         crate.collideWorldBounds=true;
         crate.scale.setTo(.2,.2)
         crate.enableBody=true;
-        console.log(game.world.height)
 
 
     },
