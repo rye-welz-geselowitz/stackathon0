@@ -9,4 +9,5 @@
     game.state.add('end',endState);
     game.state.add('wordrain-end',wordrainEndState);
 
+
     game.state.start('boot');
