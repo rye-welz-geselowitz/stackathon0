@@ -7,7 +7,11 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('GameController', function ($scope, ScriptFactory) {
-    var scripts=['phaser.min.js','helperFuncs.js','data.js','boot.js','data.js','end.js','instructions.js','load.js','menu.js','play.js','wordrain-end.js','wordrain-instructions.js','wordrain.js','game.js']
+app.controller('GameController', function ($scope) {
+    var gameWindow=gameframe.contentWindow;
+    document.querySelector('iframe').onload = function(){
+        //TODO: This SHOULD make sure the data gets sent only once the iframe is loaded. But make sure!
+        gameWindow.postMessage({name:'bob'},'/')         
+    };
 
 });
