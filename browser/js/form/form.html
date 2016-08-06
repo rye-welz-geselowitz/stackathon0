@@ -1,6 +1,90 @@
-<form name="newGameForm" ng-submit="addNewGame(newGame)" > 
+<!-- <form name="newGameForm" ng-submit="addNewGame(newGame)" > 
 <button>Add Game</button>  
         <p>Object:</p>
 <textarea rows=10 name=”object” ng-model="newGame" style="width:100%" required>
 
-</form>
+</form> -->
+
+<style>
+	.blank{
+		display:inline-block;
+		width:200px;
+	}
+</style>
+{{gameData}}
+<div class='container'>
+	<div class='well'>
+	  <form class="form-horizontal" name='newGameForm' ng-submit='addNewGame()' >
+	    <fieldset>
+	      <legend><h2>About You</h2></legend>
+	      <div class="form-group">
+
+	        <label class="control-label">Name</label>
+	        <div>
+	          <input name='yourName' class="form-control" type="text" ng-model='gameData.subject.name' required>
+	        </div>
+
+		    <label class="control-label">Pronouns</label>
+		    <div>   
+		        <select name="yourPronouns" ng-model="gameData.subject.PGP">
+			      <option value="neutral">They/them</option>
+			      <option value="female">She/her</option>
+			      <option value="male">He/him</option>
+			    </select>
+		    </div>
+
+
+	        <label class='control-label'>"You" Words</label>
+	        <div>
+	          <input name='yourWordsPos' class="form-control" type="text"  ng-model='gameData.associatedWords' required>
+	        </div>
+	        <label class="control-label">"Not You" Words</label>
+	        <div >
+	          <input name='yourWordsNeg' class="form-control" type="tet"  ng-model='gameData.unAssociatedWords' required>
+	        </div>       
+	      </div>
+	      <legend><h2>About Someone Else</h2></legend>
+	      <div class="form-group">
+
+	        <label class="control-label">Name</label>
+	        <div>
+	          <input name='theirName' class="form-control" type="text" ng-model='gameData.control.name' required>
+	        </div>
+
+		    <label class="control-label">Pronouns</label>
+		    <div>   
+		        <select name="theirPronouns" ng-model="gameData.control.PGP">
+			      <option value="neutral">They/them</option>
+			      <option value="female">She/her</option>
+			      <option value="male">He/him</option>
+			    </select>
+		    </div>
+
+	      <legend><h2>Fill In The Blanks</h2></legend>
+	      <div class="form-group">
+	        <div>
+	          Name is <input class="blank" ng-value='client.name' name='clientName' class="form-control" type="text" ng-model='client.name' ng-disabled="loggedIn" required>
+	        </div>
+	        <div>
+	          Name <input class="blank" ng-value='client.name' name='clientName' class="form-control" type="text" ng-model='client.name' ng-disabled="loggedIn" required>
+	        </div>
+	         <div>
+	          <input class="blank" ng-value='client.name' name='clientName' class="form-control" type="text" ng-model='client.name' ng-disabled="loggedIn" required> Name's <input class="blank" ng-value='client.name' name='clientName' class="form-control" type="text" ng-model='client.name' ng-disabled="loggedIn" required>
+	        </div>
+	        <div>
+	          Give Name<input class="blank" ng-value='client.name' name='clientName' class="form-control" type="text" ng-model='client.name' ng-disabled="loggedIn" required>
+	        </div>	        
+
+	      </div>
+	      <div class="form-group">
+	        <div class="col-xs-10 col-xs-offset-2">
+	          <div class="alert alert-warning" ng-show='newGameForm.clientName.$error.required&&checkoutForm.clientName.$dirty'>Please enter a name</div>
+	         
+	          <button type="submit" class="btn btn-success" ng-disabled='checkoutForm.$invalid'>Submit Order</button>
+
+	        </div>
+	      </div>
+	    </fieldset>
+	  </form>
+	</div>
+</div>

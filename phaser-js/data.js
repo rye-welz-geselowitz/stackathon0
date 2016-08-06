@@ -1,4 +1,4 @@
-//DUMMY VALUES??!
+//DUMMY VALUES
 var gameData={
     pronouns:{
         //S: subject, O: object: P1: possessive1, P1: possesive2: SR: self-referential 
@@ -23,11 +23,8 @@ var gameData={
     ]
 }
 
-console.log('loading iframe')
 window.addEventListener("message", receiveMessage, false);
 function receiveMessage(event){
-	console.log('receivingMessage')
-	//TODO: FIGURE OUT TIMING!!!
     gameData=event.data;
     
 }
