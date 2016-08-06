@@ -1,9 +1,10 @@
-initiateRoundClicker();
-
 var instructionsState={
      create: function(){
+        initiateRoundClicker();  
+
         game.add.sprite(0,0,'mountains');
         //Get pronoun strings
+        console.log(gameData)
         var subjectPronouns=getPronounString(gameData.subject.PGP);
         var controlPronouns=getPronounString(gameData.currentGame.control.PGP)
 

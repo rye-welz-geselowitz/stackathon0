@@ -12,8 +12,5 @@
             readyButton.events.onInputOver.add(overReady,this);
             readyButton.events.onInputOut.add(overReadyLeave,this);
             readyButton.events.onInputDown.add(toMenu,this);
-            //TODO: find a differne way to do this
-
-            initiateRoundClicker();
         }
     }

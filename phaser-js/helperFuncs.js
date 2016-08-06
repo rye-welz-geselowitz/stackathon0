@@ -39,11 +39,13 @@
     }
 
     initiateRoundClicker=function(){
+        console.log('initiating round')
         gameData.currentGame={};
         gameData.currentGame.control=gameData.controls[Math.floor(Math.random()*gameData.controls.length)];
         gameData.currentGame.gameInput=createGameInput();
         gameData.currentGame.controlTimes=[];
         gameData.currentGame.subjectTimes=[];
+        console.log(gameData.currentGame);
     }
     initiateRoundWordRain=function(){
         gameData.currentGame={};
