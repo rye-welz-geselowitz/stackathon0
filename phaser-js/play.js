@@ -1,7 +1,17 @@
+var playStart;
+var controlTimes=[];
+var subjectTimes=[];
+var words;
+var name;
+var sentence;
+
 var playState={
     create: function(){
         game.add.sprite(0,0,'mountains');
         playStart=game.time.now;
+        if(gameData.currentGame.gameInput.nonbinary){
+            name=textWithBody(gameData.currentGame.gameInput[0].name,0,0,game.world.centerX,game.world.centerY-40,largeGray,true);
+        }
         sentence=textWithBody(gameData.currentGame.gameInput[0].sentencePre,0,0,game.world.centerX,game.world.centerY,mediumWhite,true);
         //create words group
         words=game.add.group();
@@ -15,6 +25,10 @@ var playState={
     },
     update: function(){
         game.physics.arcade.collide(sentence,words);
+        if(name){
+            game.physics.arcade.collide(words,name);
+        }
+
     }
 }
 

@@ -1,3 +1,5 @@
+    
+
     //HELPER FUNCS
     var textWithBody=function(words,velocityX,velocityY,locationX,locationY,style,immovable){
         var text = game.add.text(0,0, words,style);
@@ -72,19 +74,20 @@
 
 
 
-    //GAME VARIABLES
-    var playStart;
-    var controlTimes=[];
-    var subjectTimes=[];
+
 
     //styling variables
     //TODO: Update names to generic!!
-    var mediumWhite={ font: 'bold 20pt Arial', fill: 'black'};
-    var mediumGray={ font: 'bold 20pt Arial', fill: 'gray'};
-    var largeGray={ font: 'bold 30pt Arial', fill: 'gray'};
-    var largeWhite={ font: 'bold 30pt Arial', fill: 'black'};
-    var largeDarkGray={ font: 'bold 30pt Arial', fill: 'white'};
-    var mediumRed= { font: 'bold 20pt Arial', fill: 'red'};
-    var largeRed= { font: 'bold 30pt Arial', fill: 'red'};
-    var largeGreen={ font: 'bold 30pt Arial', fill: 'green'};
-    var mediumGreen= { font: 'bold 20pt Arial', fill: 'green'};
+    var mediumWhite={ font: 'bold 20pt Palatino Linotype', fill: 'black'};
+    var mediumGray={ font: 'bold 20pt Palatino Linotype', fill: 'gray'};
+    var mediumGrayPlus={ font: 'bold 25pt Palatino Linotype', fill: 'gray'};
+
+    var largeGray={ font: '30pt Palatino Linotype', fill: 'gray'};
+    var largeWhite={ font: '30pt Palatino Linotype', fill: 'black'};
+    var largeDarkGray={ font: '30pt Palatino Linotype', fill: 'white'};
+    var mediumRed= { font: 'bold 20pt Palatino Linotype', fill: '#800000'};
+    var largeRed= { font: 'bold 30pt Palatino Linotype', fill: ' #800000'};
+    var largeGreen={ font: 'bold 30pt Palatino Linotype', fill: '#003300'};
+    var mediumGreen= { font: 'bold 20pt Palatino Linotype', fill: '#003300'};
+    var mediumGreenPlus= { font: 'bold 25pt Palatino Linotype', fill: '#003300'};
+
