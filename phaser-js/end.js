@@ -1,6 +1,6 @@
     var endState={
         create: function(){
-            game.add.sprite(0,0,'mountains');
+            // game.add.sprite(0,0,'mountains');
 
             //Report scores
             var scoreReport=calculateScores();

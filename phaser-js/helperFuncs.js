@@ -78,16 +78,16 @@
 
     //styling variables
     //TODO: Update names to generic!!
-    var mediumWhite={ font: 'bold 20pt Palatino Linotype', fill: 'black'};
-    var mediumGray={ font: 'bold 20pt Palatino Linotype', fill: 'gray'};
-    var mediumGrayPlus={ font: 'bold 25pt Palatino Linotype', fill: 'gray'};
+    var mediumWhite={ font: 'bold 20pt Courier New', fill: 'black'};
+    var mediumGray={ font: 'bold 20pt Courier New', fill: 'gray'};
+    var mediumGrayPlus={ font: 'bold 25pt Courier New', fill: 'gray'};
 
-    var largeGray={ font: '30pt Palatino Linotype', fill: 'gray'};
-    var largeWhite={ font: '30pt Palatino Linotype', fill: 'black'};
-    var largeDarkGray={ font: '30pt Palatino Linotype', fill: 'white'};
-    var mediumRed= { font: 'bold 20pt Palatino Linotype', fill: '#800000'};
-    var largeRed= { font: 'bold 30pt Palatino Linotype', fill: ' #800000'};
-    var largeGreen={ font: 'bold 30pt Palatino Linotype', fill: '#003300'};
-    var mediumGreen= { font: 'bold 20pt Palatino Linotype', fill: '#003300'};
-    var mediumGreenPlus= { font: 'bold 25pt Palatino Linotype', fill: '#003300'};
+    var largeGray={ font: '30pt Courier New', fill: 'gray'};
+    var largeWhite={ font: '30pt Courier New', fill: 'black'};
+    var largeDarkGray={ font: '30pt Courier New', fill: 'white'};
+    var mediumRed= { font: '20pt  Courier New', fill: '#800000'};
+    var largeRed= { font: '40pt Courier New', fill: ' #800000'};
+    var largeGreen={ font: '40pt Courier New', fill: '#003300'};
+    var mediumGreen= { font: '20pt Courier New', fill: '#003300'};
+    var mediumGreenPlus= { font: '25pt Courier New', fill: '#003300'};
 

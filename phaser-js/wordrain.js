@@ -4,58 +4,36 @@ var notMeWords;
 var wrScore;
 var scoreText;
 var rainBegun=false;
-
+var beginTime;
+var timeText;
 
 var wordrainState={
     create: function(){
         initiateRoundWordRain();
 
         //background
-        game.add.sprite(0,0,'water_mountains');
+        // game.add.sprite(0,0,'water_mountains');
         //score
-        scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(16, 16, 'Score: 0', mediumWhite);
+        timeText = game.add.text(16, 46, 'Time: 30', mediumWhite);
 
         //words
         meWords=game.add.group();
         meWords.enableBody=true;
-        var word;
-        for(var i=0;i<gameData.currentGame.meWords.length;i++){
-            var yCoord=0-(Math.random()*game.world.height);
-            var velocityX=100*Math.random();
-            word=textWithBody(gameData.currentGame.meWords[i],0,velocityX,Math.random()*game.world.width,yCoord,mediumGreen,false)
-            if(['she','her','him','he','they','them'].indexOf(gameData.currentGame.meWords[i])!==-1){
-                word.children[0].setStyle(largeGreen);
-            }
-            
-            word.body.collideWorldBounds = false;
-            word.body.gravity.y=6;
-            word.body.bounce.y=0.7 + Math.random() * 0.2;
-            meWords.add(word);
-        }
+        game.time.events.repeat(Phaser.Timer.SECOND*2, Infinity, generateWords, this);
+
         notMeWords=game.add.group();
-        var numToAdd;
-        for(var i=0;i<gameData.currentGame.notMeWords.length;i++){
-            numToAdd=1+Math.floor(Math.random()*5);
-            //TOO MANY WORDS!!!
-            for(var j=0;j<numToAdd;j++){
-                var yCoord=0-(Math.random()*game.world.height*j);
-                var velocityX=100*Math.random();
-                word=textWithBody(gameData.currentGame.notMeWords[i],0,velocityX,Math.random()*game.world.width,yCoord,mediumRed,false)
-                if(['she','her','him','he','they','them'].indexOf(gameData.currentGame.notMeWords[i])!==-1){
-                    word.children[0].setStyle(largeRed);
-                }
-                word.body.collideWorldBounds = false;
-                word.body.gravity.y=6;
-                word.body.bounce.y=0.7 + Math.random() * 0.2;
-                notMeWords.add(word);
-            }
-        }
+        notMeWords.enableBody=true;
+
         //crate
         crate = game.add.sprite(game.world.centerX,game.world.height-100, 'crate');
         game.physics.arcade.enable(crate);
         crate.collideWorldBounds=true;
         crate.scale.setTo(.2,.2)
         crate.enableBody=true;
+
+        //date
+        beginTime=Date.now();
 
 
     },
@@ -72,23 +50,9 @@ var wordrainState={
         else{
             crate.body.velocity.x=0;
         }
-        var mustStop=true;
-
-        meWords.forEach(function(word){
-            if(word.alive&&word.inWorld){
-                mustStop=false;
-                rainBegun=true;
-            }
-        })
-        if(mustStop||!rainBegun){
-            notMeWords.forEach(function(word){
-                if(word.alive&&word.inWorld){ 
-                    rainBegun=true;
-                    mustStop=false;
-                }
-            })
-        }
-        if(mustStop&&rainBegun){
+        var timeElapsed=Date.now()-beginTime;
+        timeText.text='Time: '+(30-parseFloat(timeElapsed/1000).toFixed(0));
+        if(timeElapsed>30000){
             game.state.start('wordrain-end');
         }
         
@@ -97,14 +61,45 @@ var wordrainState={
 }
 
 function reward(crate,word){
-    console.log('PRE KILL',word);
-    word.kill();
-    console.log('POST KILL',word)
-    gameData.currentGame.score++;
-    scoreText.text = 'Score: ' + gameData.currentGame.score;
+    registerCatch(1,crate,word)
 }
 function punish(crate,word){ 
+    registerCatch(-1,crate,word)
+}
+
+function registerCatch(base,crate,word){
     word.kill();
-    gameData.currentGame.score--;
-    scoreText.text = 'Score: ' + gameData.currentGame.score;
+    if(word.provideBonus){
+        gameData.currentGame.score+=(3*base);
+    }
+    else{
+        gameData.currentGame.score+=(base);
+    }
+    scoreText.text = 'Score: ' + gameData.currentGame.score;    
+}
+
+function generateWords(){
+    generateWordHelper(meWords,gameData.currentGame.meWords,mediumGreen,largeGreen);
+    generateWordHelper(notMeWords,gameData.currentGame.notMeWords,mediumRed,largeRed);
+}
+
+function generateWordHelper(group,wordArr,styleLittle,styleBig){
+    var i=Math.floor(Math.random()*wordArr.length);
+    var yCoord=0
+    var xCoord=Math.random()*game.world.width;
+    if(xCoord<50){
+        xCoord+=50;
+    }
+    if(xCoord>(game.world.width-50)){
+        xCoord-=50;
+    }
+    var velocityX=100*Math.random();
+    word=textWithBody(wordArr[i],0,velocityX,xCoord,yCoord,styleLittle,false)
+    if(['she','her','him','he','they','them'].indexOf(wordArr[i])!==-1){
+        word.children[0].setStyle(styleBig);
+        word.provideBonus=true;
+    }
+    word.body.collideWorldBounds = false;
+    word.body.gravity.y=6;
+    group.add(word);    
 }

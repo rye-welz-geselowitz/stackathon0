@@ -1,6 +1,6 @@
     var wordrainEndState={
         create: function(){
-            game.add.sprite(0,0,'water_mountains');
+            // game.add.sprite(0,0,'water_mountains');
             //Report scores
             var reportLabel=game.add.text(game.world.centerX,game.world.centerY,'Game Over. Score: '+gameData.currentGame.score,mediumGray); 
             reportLabel.anchor.set(.5);  

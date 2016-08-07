@@ -1,6 +1,6 @@
 var menuState={
      create: function(){
-        game.add.sprite(0,0,'sky');
+        // game.add.sprite(0,0,'sky');
         var challengeString1=gameData.subject.name+' invites you to hone your pronoun skills!'
         var challengeString2='Choose a Game:'
         var readySpeed=game.add.text(game.world.centerX,game.world.centerY+40,'Speed Clicker',mediumWhite); 

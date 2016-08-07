@@ -6,12 +6,19 @@
 </form> -->
 
 <style>
-	.blank{
-		display:inline-block;
-		width:200px;
+	.set{
+		color:black;
+		display: inline;
+	}
+	.fillable{
+		color:gray;
+		display: inline;
 	}
 </style>
+
 {{gameData}}
+{{preData}}
+
 <div class='container'>
 	<div class='well'>
 	  <form class="form-horizontal" name='newGameForm' ng-submit='addNewGame()' >
@@ -43,6 +50,33 @@
 	          <input name='yourWordsNeg' class="form-control" type="tet"  ng-model='gameData.unAssociatedWords' required>
 	        </div>       
 	      </div>
+	      <legend><h2>Fill In The Blanks (You)</h2></legend>
+	      <div class="form-group">
+	      	<div ng-repeat='sentence in gameData.subject.sentences'>
+		      	<div class='col-xs-12'>
+		      		<div ng-class='{set:!word,fillable:word}' ng-repeat='word in sentence.array'>{{word||getPOS(sentence.POS)}} </div>
+		      	</div>
+		        <div class='col-xs-12'>
+		        	<input class="form-control" type="text" ng-model='' required>
+		        </div>
+	        </div>
+<!-- 
+	      	<div class='col-xs-12'><div class='set'>{{getPOS('S')}} </div><div class='fillable'>{{preData.subjSentences[1]}}</div></div>
+	        <div class='col-xs-12'>
+	        	<input name='subjSentence1' class="form-control" type="text" ng-model='preData.subjSentences[1]' required>
+	        </div>
+
+	        <div class='col-xs-12'><div class='set'>Give {{getPOS('O')}} </div><div class='fillable'>{{preData.subjSentences[2]}}</div></div>
+	        <div class='col-xs-12'>
+	        	<input name='subjSentence2' class="form-control" type="text" ng-model='preData.subjSentences[2]' required>
+	        </div>
+
+	        <div class='col-xs-12'><div class='set'>{{gameData.subject.name||'(name)'}} </div><div class='fillable'>{{preData.subjSentences[3]}}</div><div class='set'> {{getPOS('SR')}}</div></div>
+	        <div class='col-xs-12'>
+	        	<input name='subjSentence3' class="form-control" type="text" ng-model='preData.subjSentences[3]' required>
+	        </div> -->
+
+	      </div>
 	      <legend><h2>About Someone Else</h2></legend>
 	      <div class="form-group">
 
@@ -59,23 +93,9 @@
 			      <option value="male">He/him</option>
 			    </select>
 		    </div>
-
-	      <legend><h2>Fill In The Blanks</h2></legend>
-	      <div class="form-group">
-	        <div>
-	          Name is <input class="blank" ng-value='client.name' name='clientName' class="form-control" type="text" ng-model='client.name' ng-disabled="loggedIn" required>
-	        </div>
-	        <div>
-	          Name <input class="blank" ng-value='client.name' name='clientName' class="form-control" type="text" ng-model='client.name' ng-disabled="loggedIn" required>
-	        </div>
-	         <div>
-	          <input class="blank" ng-value='client.name' name='clientName' class="form-control" type="text" ng-model='client.name' ng-disabled="loggedIn" required> Name's <input class="blank" ng-value='client.name' name='clientName' class="form-control" type="text" ng-model='client.name' ng-disabled="loggedIn" required>
-	        </div>
-	        <div>
-	          Give Name<input class="blank" ng-value='client.name' name='clientName' class="form-control" type="text" ng-model='client.name' ng-disabled="loggedIn" required>
-	        </div>	        
-
 	      </div>
+
+
 	      <div class="form-group">
 	        <div class="col-xs-10 col-xs-offset-2">
 	          <div class="alert alert-warning" ng-show='newGameForm.clientName.$error.required&&checkoutForm.clientName.$dirty'>Please enter a name</div>

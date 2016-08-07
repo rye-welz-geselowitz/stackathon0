@@ -7,7 +7,7 @@ var sentence;
 
 var playState={
     create: function(){
-        game.add.sprite(0,0,'mountains');
+        // game.add.sprite(0,0,'mountains');
         playStart=game.time.now;
         if(gameData.currentGame.gameInput.nonbinary){
             name=textWithBody(gameData.currentGame.gameInput[0].name,0,0,game.world.centerX,game.world.centerY-40,largeGray,true);
