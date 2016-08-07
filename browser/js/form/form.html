@@ -1,9 +1,4 @@
-<!-- <form name="newGameForm" ng-submit="addNewGame(newGame)" > 
-<button>Add Game</button>  
-        <p>Object:</p>
-<textarea rows=10 name=”object” ng-model="newGame" style="width:100%" required>
 
-</form> -->
 
 <style>
 	.set{
@@ -14,15 +9,26 @@
 		color:gray;
 		display: inline;
 	}
+	.form-group{
+		padding:0px 40px;
+	}
+	.explanation{
+		font-style: italic;
+
+	}
+	.container{
+		width:50%;
+	}
 </style>
 
-{{gameData}}
-{{preData}}
 
 <div class='container'>
 	<div class='well'>
-	  <form class="form-horizontal" name='newGameForm' ng-submit='addNewGame()' >
+	  <form class="form-horizontal" name='newGameForm' ng-submit='addNewGame()' novalidate>
 	    <fieldset>
+    	 <div class='explanation'>
+      		Fill in the information below to create your custom game. You will receive a private link to the game. All information entered in this form will be incorporated into the game, so no secrets!
+      	</div>
 	      <legend><h2>About You</h2></legend>
 	      <div class="form-group">
 
@@ -42,65 +48,75 @@
 
 
 	        <label class='control-label'>"You" Words</label>
+	       	<div class='explanation'>
+	      		What do you like? What identities do you hold? Who are you? (Comma separated, please.)
+	      	</div>
 	        <div>
-	          <input name='yourWordsPos' class="form-control" type="text"  ng-model='gameData.associatedWords' required>
+	          <input name='yourWordsPos' class="form-control" type="text"  ng-model='gameData.subject.associatedWords' required>
 	        </div>
 	        <label class="control-label">"Not You" Words</label>
+	        	What do you hate? What identities do you NOT hold? Who are you not? (Comma separated, please.)
+
 	        <div >
-	          <input name='yourWordsNeg' class="form-control" type="tet"  ng-model='gameData.unAssociatedWords' required>
+	          <input name='yourWordsNeg' class="form-control" type="tet"  ng-model='gameData.subject.unAssociatedWords' required>
 	        </div>       
 	      </div>
 	      <legend><h2>Fill In The Blanks (You)</h2></legend>
+	      <div class='explanation'>
+	      	Fill in the sentences to describe yourself. Remember, your friends and loved ones will be "training" on these sentences... so go wild with the subliminal messaging!
+	      </div>
 	      <div class="form-group">
 	      	<div ng-repeat='sentence in gameData.subject.sentences'>
 		      	<div class='col-xs-12'>
-		      		<div ng-class='{set:!word,fillable:word}' ng-repeat='word in sentence.array'>{{word||getPOS(sentence.POS)}} </div>
+		      		<div ng-class='{set:!word,fillable:word}' ng-repeat='word in sentence.array'>{{findPrint(word,sentence)}} </div>
 		      	</div>
-		        <div class='col-xs-12'>
-		        	<input class="form-control" type="text" ng-model='' required>
-		        </div>
-	        </div>
-<!-- 
-	      	<div class='col-xs-12'><div class='set'>{{getPOS('S')}} </div><div class='fillable'>{{preData.subjSentences[1]}}</div></div>
-	        <div class='col-xs-12'>
-	        	<input name='subjSentence1' class="form-control" type="text" ng-model='preData.subjSentences[1]' required>
-	        </div>
-
-	        <div class='col-xs-12'><div class='set'>Give {{getPOS('O')}} </div><div class='fillable'>{{preData.subjSentences[2]}}</div></div>
-	        <div class='col-xs-12'>
-	        	<input name='subjSentence2' class="form-control" type="text" ng-model='preData.subjSentences[2]' required>
-	        </div>
-
-	        <div class='col-xs-12'><div class='set'>{{gameData.subject.name||'(name)'}} </div><div class='fillable'>{{preData.subjSentences[3]}}</div><div class='set'> {{getPOS('SR')}}</div></div>
-	        <div class='col-xs-12'>
-	        	<input name='subjSentence3' class="form-control" type="text" ng-model='preData.subjSentences[3]' required>
-	        </div> -->
-
+	        	<input ng-show='shouldShow(0,sentence)' class="form-control col-xs-12" type="text" ng-model='sentence.array[0]' required='sentence.array[0]'>
+	        	<input ng-show='shouldShow(1,sentence)' class="form-control col-xs-12" type="text" ng-model='sentence.array[1]' required='sentence.array[1]'>
+	        	<input ng-show='shouldShow(2,sentence)' class="form-control col-xs-12" type="text" ng-model='sentence.array[2]' required='sentence.array[2]'>
+        
+ 			</div>
 	      </div>
 	      <legend><h2>About Someone Else</h2></legend>
+	      <div class='explanation'>
+	      	The player will be asked to compare their performance on your pronouns with their performance on a mutual acquaintance's pronouns. Feel free to choose a friend or family member known by both you and the person you plan to share this game with.
+	      </div>
 	      <div class="form-group">
 
 	        <label class="control-label">Name</label>
 	        <div>
-	          <input name='theirName' class="form-control" type="text" ng-model='gameData.control.name' required>
+	          <input name='theirName' class="form-control" type="text" ng-model='gameData.controls[0].name' required>
 	        </div>
 
 		    <label class="control-label">Pronouns</label>
 		    <div>   
-		        <select name="theirPronouns" ng-model="gameData.control.PGP">
+		        <select name="theirPronouns" ng-model="gameData.controls[0].PGP">
 			      <option value="neutral">They/them</option>
 			      <option value="female">She/her</option>
 			      <option value="male">He/him</option>
 			    </select>
 		    </div>
 	      </div>
+	      <legend><h2>Fill In The Blanks (Them)</h2></legend>
+	      <div class='explanation'>
+	      		Fill in the sentences to describe the person specified above. Remember, your friend or loved one will be training on these sentences, so don't be too mean!
+	      </div>
+	      <div class="form-group">
+	      	<div ng-repeat='sentence in gameData.controls[0].sentences'>
+		      	<div class='col-xs-12'>
+		      		<div ng-class='{set:!word,fillable:word}' ng-repeat='word in sentence.array'>{{findPrint(word,sentence,true)}} </div>
+		      	</div>
+	        	<input ng-show='shouldShow(0,sentence)' class="form-control col-xs-12" type="text" ng-model='sentence.array[0]' required='sentence.array[0]'>
+	        	<input ng-show='shouldShow(1,sentence)' class="form-control col-xs-12" type="text" ng-model='sentence.array[1]' required='sentence.array[1]'>
+	        	<input ng-show='shouldShow(2,sentence)' class="form-control col-xs-12" type="text" ng-model='sentence.array[2]' required='sentence.array[2]'>
+        
+ 			</div>
+	      </div>
 
 
 	      <div class="form-group">
 	        <div class="col-xs-10 col-xs-offset-2">
-	          <div class="alert alert-warning" ng-show='newGameForm.clientName.$error.required&&checkoutForm.clientName.$dirty'>Please enter a name</div>
-	         
-	          <button type="submit" class="btn btn-success" ng-disabled='checkoutForm.$invalid'>Submit Order</button>
+	          <div class="alert alert-warning" ng-show='newGameForm.yourName.$error.required&&newGameForm.yourName.$dirty'>Please enter a name</div>
+	          <button type="submit" class="btn btn-success">Take Me To My Game!</button>
 
 	        </div>
 	      </div>

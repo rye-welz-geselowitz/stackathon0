@@ -1,7 +1,7 @@
 app.factory('GameFactory', function ($http) {
     var GameFactory={};
     GameFactory.postGame=function(game){
-        return $http.post('/api/games',{data:game})
+        return $http.post('/api/games',{data:JSON.stringify(game)})
         .then(function(res){
             console.log(res);
             return res.data;
@@ -22,27 +22,27 @@ app.factory('GameFactory', function ($http) {
         neutral:{S:'they',O:'them',P1:'their',P2:'theirs',SR:'themself'}
     },
     subject:{
-        name: 'Jamie',
+        name: 'CJ',
         PGP: 'female',
         associatedWords: ['ponies','puppies','dancing','American','woman','New Yorker'],
         unAssociatedWords: ['fish','exercise','war','going to the gym'],
         sentences: [
-            {array: ['I love',null],POS: 'O'},
-            {array: [null,'is a boss'],POS:'S'}
+            {array: ['I love',0],POS: 'O'},
+            {array: [0,'is a boss'],POS:'S'}
         ]
     },
     controls: [
         {name: 'Brandon',
         PGP: 'male',
         sentences: [
-            {array: ['Is that',null,'puppy?'],POS: 'P1'},
-            {array: ['Has he seen',null,'?'],POS:'SR'}
+            {array: ['Is that',0,'puppy?'],POS: 'P1'},
+            {array: ['Has he seen',0,'?'],POS:'SR'}
         ]},
         {name: 'Mom',
         PGP: 'female',
         sentences: [
-            {array: ["Isn't",null,'a great mother?'],POS: 'S'},
-            {array: ['Give',null,'a flower'],POS:'O'}
+            {array: ["Isn't",0,'a great mother?'],POS: 'S'},
+            {array: ['Give',0,'a flower'],POS:'O'}
         ]}   
     ]
 }

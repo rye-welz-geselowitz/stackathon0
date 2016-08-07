@@ -9,10 +9,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('FormController', function ($scope,GameFactory) {
-	// $scope.preData={};
-	// $scope.preData.subjSentences=["won't ever stop playing rugby.","always wanted to be an astronaut.","a vegan cupcake, plz.","won't stop taking care of"];
-
+app.controller('FormController', function ($scope,GameFactory,$state) {
 	$scope.gameData={};
 	$scope.gameData.pronouns={
         //S: subject, O: object: P1: possessive1, P1: possesive2: SR: self-referential 
@@ -23,28 +20,49 @@ app.controller('FormController', function ($scope,GameFactory) {
     $scope.gameData.subject={};
 	$scope.gameData.subject.PGP='neutral';
 	$scope.gameData.subject.sentences=[
-		{array: [null,"won't ever stop playing rugby."],POS: 'S'},
-		{array: [null,'always wanted to be an astronaut.'],POS: 'S'},
-		{array: ['Give',null,'a vegan cupcake, plz'],POS: 'O'},
-		{array: ["This kid knows how to defend",null],POS: 'SR'}
+		{array: [0,"won't ever stop playing rugby."],POS: 'S'},
+		{array: [0,'always wanted to be an astronaut.'],POS: 'S'},
+		{array: ['Give',0,'a vegan cupcake, plz'],POS: 'O'},
+		{array: ["This kid knows how to defend",0],POS: 'SR'}
 	];
-	$scope.getEmptyIndex=function(arr){
-		for(var i=0; i<arr.length; i++){
-			if(arr[i]){
-				return i
-			}
+	$scope.gameData.controls=[];
+    $scope.gameData.controls[0]={};
+	$scope.gameData.controls[0].PGP='neutral';
+	$scope.gameData.controls[0].sentences=[
+		{array: [0,"didn't mean to burn the pancakes."],POS: 'S'},
+		{array: [0,'will always support my other kids.'],POS: 'S'},
+		{array: ['I taught',0,'to ride a bike'],POS: 'O'},
+		{array: ["Has that kid seen",0],POS: 'SR'}
+	];
+	$scope.gameData.subject.associatedWords='ponies, skating, New Yorker, student, biology';
+	$scope.gameData.subject.unAssociatedWords='anchovies, hipsters, spiders, chick flicks','exercise';
+
+	$scope.findPrint=function(word,sentence,isControl){
+		if(word===0){
+			return $scope.getPOS(sentence.POS,isControl)
 		}
+		if(word){
+			return word;
+		}
+		return '';
 	}
-
-
+	$scope.shouldShow=function(wordIndex,sentence){
+		var toReturn=(sentence.array[wordIndex]!==0&&(wordIndex<=(sentence.array.length)-1));
+		return toReturn;
+	}
 
 	$scope.addNewGame=function(){
-		$scope.gameData.name.associatedWords=$scope.gameData.name.associatedWords.split(',');
-		$scope.gameData.name.associatedWords=$scope.gameData.name.unAssociatedWords.split(',');
-
-		GameFactory.postGame($scope.gameData);
+		$scope.gameData.subject.associatedWords=$scope.gameData.subject.associatedWords.split(',');
+		$scope.gameData.subject.unAssociatedWords=$scope.gameData.subject.unAssociatedWords.split(',');
+		GameFactory.postGame($scope.gameData)
+		.then(function(game){
+			$state.go('game',{hash:game.hash})
+		});
 	}
-	$scope.getPOS=function(key){
+	$scope.getPOS=function(key,isControl){
+		if(isControl){
+			return $scope.gameData.pronouns[$scope.gameData.controls[0].PGP][key].toUpperCase()
+		}
 		return $scope.gameData.pronouns[$scope.gameData.subject.PGP][key].toUpperCase();
 	}
 });
