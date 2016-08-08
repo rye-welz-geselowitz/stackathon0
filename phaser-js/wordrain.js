@@ -29,7 +29,7 @@ var wordrainState={
         crate = game.add.sprite(game.world.centerX,game.world.height-100, 'crate');
         game.physics.arcade.enable(crate);
         crate.collideWorldBounds=true;
-        crate.scale.setTo(.2,.2)
+        //crate.scale.setTo(.2,.2)
         crate.enableBody=true;
 
         //date

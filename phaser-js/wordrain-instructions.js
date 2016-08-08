@@ -5,10 +5,10 @@ var wordrainInstructionsState={
         // game.add.sprite(0,0,'water_mountains');
         var challengeString1='Catch the words associated with '+subjectName+'!'
         var challengeString2="(Don't forget those "+subjectPGP+' pronouns.)'
-        var instructions=game.add.text(game.world.centerX,game.world.centerY+40,'Avoid other words!',mediumGreen); 
+        var instructions=game.add.text(game.world.centerX,game.world.centerY+40,'Avoid other words!',mediumWhite); 
         var readyButton=game.add.text(game.world.centerX,game.world.centerY+80,'Play',mediumWhite); 
-        var challenge=game.add.text(game.world.centerX,game.world.centerY-40,challengeString1,mediumGreen); 
-        var challenge2=game.add.text(game.world.centerX,game.world.centerY,challengeString2,mediumGreenPlus);     
+        var challenge=game.add.text(game.world.centerX,game.world.centerY-40,challengeString1,mediumWhite); 
+        var challenge2=game.add.text(game.world.centerX,game.world.centerY,challengeString2,mediumWhite);     
         instructions.anchor.set(.5);
         challenge.anchor.set(.5);
         challenge2.anchor.set(0.5)

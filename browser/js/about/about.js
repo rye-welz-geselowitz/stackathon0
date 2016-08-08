@@ -9,6 +9,6 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('AboutController', function ($scope, ScriptFactory) {
+app.controller('AboutController', function ($scope) {
 
 });

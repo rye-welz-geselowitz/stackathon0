@@ -14,8 +14,21 @@ body {
   }
 }
 
+.form {
+  font-family: Arial;
+  font-size: 16px;
+  width:80%;
+  margin: 0 auto;
+  legend{
+     font-family: Amatica SC, cursive;
+     font-size:42px; 
+     font-weight:bold;
+  }
+}
+
 #main {
-  padding-top: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   margin: 0 auto;
   display: block;
   background: white;
@@ -24,8 +37,21 @@ body {
   width:820px;
   margin: 0 auto; 
   margin-bottom:40px;
-  font-family: Amatica SC, cursive;
+  font-family: Amatica SC;
+  font-size:32px;
+  h1{
+    font-family: Amatica SC, cursive;
+    font-size:60px;
+    text-align:center;
+    margin-top:0px;
+  }
+
 }
+
+.logo{
+    text-shadow: 2px 2px 2px black;
+    margin-top:-5px;
+  }
 
 @import 'directives/main';
 @import 'home/main';
