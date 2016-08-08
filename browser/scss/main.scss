@@ -3,7 +3,7 @@
 }
 
 body {
-  background: #fdfdfd;
+  background: #6f5499;
 }
 
 @mixin clearfix {
@@ -17,6 +17,14 @@ body {
 #main {
   padding-top: 60px;
   margin: 0 auto;
+  display: block;
+  background: white;
+  box-shadow: 1px 1px 14px -3px black;
+  border-bottom: 1px solid black;
+  width:820px;
+  margin: 0 auto; 
+  margin-bottom:40px;
+  font-family: Amatica SC, cursive;
 }
 
 @import 'directives/main';

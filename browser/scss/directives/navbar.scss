@@ -2,8 +2,11 @@ navbar {
 
   display: block;
   background: white;
-  border-bottom: 1px solid black;
   box-shadow: 1px 1px 14px -3px black;
+  width:820px;
+  margin: 0 auto; 
+  margin-top:40px;
+
 
   .container {
     width: 91%;
@@ -11,15 +14,10 @@ navbar {
     padding-top: 20px;
   }
 
-  fullstack-logo {
-    margin-top: 5px;
-    margin-right: 20px;
-    width: 40px;
-  }
-
   a {
     color: black;
-    font-size: 16px;
+    font-size: 30px;
+    font-family: Amatica SC, cursive;
   }
 
   .nav > li > a {
@@ -36,27 +34,16 @@ navbar {
       background: none;
     }
   }
-
-  .login-button {
-    float: right;
-    border: 1px solid black;
-    margin-top: 10px;
-    background: none;
-    outline: none !important;
+  .navbar-header{
+    width:200px
+  }
+  p {
+    font-size: 40px;
+    font-weight: 300;
+    font-weight:bold;
+    font-family: Amatica SC, cursive;
   }
 
-  .welcome {
-    float: right;
-    margin-top: 12px;
-    span {
-      color: black;
-      font-size: 16px;
-      margin-right: 5px;
-    }
-    a {
-      color: #f30046;
-      cursor: pointer;
-    }
-  }
+
 
 }
