@@ -20,6 +20,7 @@ app.controller('GameController', function ($scope,$stateParams,GameFactory) {
             };
         })
     }else{
+        $scope.linkText='This is a demo. Create your own!'
         document.querySelector('iframe').onload = function(){
             gameWindow.postMessage(GameFactory.getDemoData(),'/')    
         };       
