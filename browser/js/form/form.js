@@ -22,7 +22,7 @@ app.controller('FormController', function ($scope,GameFactory,$state) {
 	$scope.gameData.subject.sentences=[
 		{array: [0,"won't ever stop playing rugby."],POS: 'S'},
 		{array: [0,'always wanted to be an astronaut.'],POS: 'S'},
-		{array: ['Give',0,'a vegan cupcake, plz'],POS: 'O'},
+		{array: ["I'll always love",0],POS: 'O'},
 		{array: ["This kid knows how to defend",0],POS: 'SR'}
 	];
 	$scope.gameData.controls=[];
@@ -31,8 +31,8 @@ app.controller('FormController', function ($scope,GameFactory,$state) {
 	$scope.gameData.controls[0].sentences=[
 		{array: [0,"didn't mean to burn the pancakes."],POS: 'S'},
 		{array: [0,'will always support my other kids.'],POS: 'S'},
-		{array: ['I taught',0,'to ride a bike'],POS: 'O'},
-		{array: ["Has that kid seen",0],POS: 'SR'}
+		{array: ['I saw that girl high-five',0],POS: 'O'},
+		{array: ["That kid clearly loves",0],POS: 'SR'}
 	];
 	$scope.gameData.subject.associatedWords='ponies, skating, New Yorker, student, biology';
 	$scope.gameData.subject.unAssociatedWords='anchovies, hipsters, spiders, chick flicks','exercise';
