@@ -7,7 +7,7 @@
  */
 
 module.exports = {
-    "DATABASE_URI": 'postgres://bgboisxbccpgjp:TXObC3zNB37NiFmJ2g8cPnLmLk@ec2-54-243-204-129.compute-1.amazonaws.com:5432/d6mpuii38n1per',
+    "DATABASE_URI": process.env.DATABASE_URI,
     "SESSION_SECRET": process.env.SESSION_SECRET,
     "TWITTER": {
         "consumerKey": process.env.TWITTER_CONSUMER_KEY,
